@@ -128,3 +128,17 @@ const otpGenerateMail = async (to, otp) => {
 }
 
 module.exports = otpGenerateMail;
+
+...............
+app.use(express.static('public'));
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'public/videos');
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname));
+    }
+});
+
+const upload = multer({ storage });
